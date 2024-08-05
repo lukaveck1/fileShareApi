@@ -38,7 +38,7 @@ When errors occur the consumer will get a JSON payload verifying that an error o
 
 ### If token is not set when sending request:
 
-![Token is not set.](public/readme_images/unauthenticated.png)
+![Token is not set.](public/readme_images/unauthenticated_err.png)
 
 ```
 {
