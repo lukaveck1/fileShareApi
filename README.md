@@ -71,7 +71,7 @@ When errors occur the consumer will get a JSON payload verifying that an error o
 
 ### Uploading file that is not image
 
-![Successful post request.](public/readme_images/file_mime_error.png)
+![File can only be image.](public/readme_images/file_mime_error.png)
 
 ```
 {
