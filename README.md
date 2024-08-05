@@ -44,7 +44,7 @@ When errors occur the consumer will get a JSON payload verifying that an error o
 
 ### If token is not set when sending request:
 
-![Token is not set.](storage/app/public/readme_images/unauthenticated.png)
+![Token is not set.](public/readme_images/unauthenticated.png)
 
 ```
 {
@@ -52,7 +52,7 @@ When errors occur the consumer will get a JSON payload verifying that an error o
 }
 ```
 
-![Missing required parameter in request.](storage/app/public/readme_images/unsuccessful_post.png)
+![Missing required parameter in request.](public/readme_images/unsuccessful_post.png)
 
 ### Missing required parameter in request
 
@@ -71,7 +71,7 @@ When errors occur the consumer will get a JSON payload verifying that an error o
 
 ### Successful post request
 
-![Successful post request.](storage/app/public/readme_images/successful_post.png)
+![Successful post request.](public/readme_images/successful_post.png)
 
 ```
 {
@@ -92,7 +92,7 @@ When errors occur the consumer will get a JSON payload verifying that an error o
 
 ### Collection of items
 
-![Successful collection request.](storage/app/public/readme_images/successful_collection.png)
+![Successful collection request.](public/readme_images/successful_collection.png)
 
 ```
 {
@@ -139,7 +139,7 @@ When errors occur the consumer will get a JSON payload verifying that an error o
 
 ### Item
 
-![Successful item request.](storage/app/public/readme_images/successful_item.png)
+![Successful item request.](public/readme_images/successful_item.png)
 
 ```
 {
