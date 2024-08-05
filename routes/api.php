@@ -8,7 +8,12 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::middleware('auth:sanctum')->group(function () { 
-    Route::get('files', [\App\Http\Controllers\Api\FilesController::class, 'index']);
-    Route::get('files/{file}', [\App\Http\Controllers\Api\FilesController::class, 'show']);
-    Route::post('files', [\App\Http\Controllers\Api\FilesController::class, 'store']);
+    Route::middleware('throttle:getRequestApiLimiter')->group(function () { 
+        Route::get('files', [\App\Http\Controllers\Api\FilesController::class, 'index']);
+        Route::get('files/{file}', [\App\Http\Controllers\Api\FilesController::class, 'show']);
+    });
+
+    Route::middleware('throttle:postRequestApiLimiter')->group(function () { 
+        Route::post('files', [\App\Http\Controllers\Api\FilesController::class, 'store']);
+    });
 });

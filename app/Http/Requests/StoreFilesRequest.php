@@ -25,7 +25,19 @@ class StoreFilesRequest extends FormRequest
             'name' => ['required'],
             'title' => ['required'],
             'description' => ['required'],
-            'photo' => ['required']
+            'photo' => ['required', 'min:1', 'max:1000', 'image']
+        ];
+    }
+
+    /**
+     * Override default messages and specify custom ones for given validation rule
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'photo.max' => 'Image size must be less than 1 MB.',
+            'photo.image' => 'File MIME type must be image.'
         ];
     }
 }
