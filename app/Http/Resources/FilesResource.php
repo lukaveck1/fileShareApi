@@ -22,8 +22,6 @@ class FilesResource extends JsonResource
             'file_type' => pathinfo($filePath),
             'file_size' => filesize($filePath),
             'path' => $this->photo
-        ]; 
-        
-        //return parent::toArray($request);
+        ];
     }
 }

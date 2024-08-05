@@ -1,66 +1,159 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Working with fileShareApi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# fileShareApi Documentation
 
-## About Laravel
+## Header
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Token for authorization: 1|tI5IwkDKYvqgLOjUtXrwQLFtKaRCMgQuOFGhdsso7af921ac
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Endpoints
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Method   | URL                                      | Description                              |
+| -------- | ---------------------------------------- | ---------------------------------------- |
+| `GET`    | `/api/files`                             | Retrieve all files.                      |
+| `GET`    | `/api/files/{file}`                      | Retrieve data for desired file.          |
+| `POST`   | `/api/files`                             | Save new file.                           |
 
-## Learning Laravel
+## Payloads
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+`POST` | `/api/files`
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+| Query key  | Type     | Description                              | Extra comments                           |
+| ---------- | -------- | ---------------------------------------- | ---------------------------------------- |
+| `name`     | `String` | Name of file                             | Required                                 |
+| `photo`    | `File`   | File content                             | Required                                 |
+| `title`    | `String` | Title of the file                        | Required                                 |
+| `description` | `String`   | Description of the file             | Required                                 |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## HTTP Response Status Codes
 
-## Laravel Sponsors
+| Code  | Title                     | Description                              |
+| ----- | ------------------------- | ---------------------------------------- |
+| `200` | `OK`                      | Request successfully processed           |
+| `201` | `Created`                 | Record has been added to the database    |
+| `401` | `Unauthenticated`         | Token is not correct                     |
+| `404` | `Not found`               | Record does not exist                    |
+| `405` | `Method not allowed`      | Request to wrong endpoint                |
+| `422` | `Unprocessable content`   | Request is missing specified parameters  |
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## Errors
 
-## Contributing
+When errors occur the consumer will get a JSON payload verifying that an error occurred together with a reason for why the error occurred.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### If token is not set when sending request:
 
-## Code of Conduct
+![Token is not set.](storage/app/public/readme_images/unauthenticated.png)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+{
+    "message": "Unauthenticated."
+}
+```
 
-## Security Vulnerabilities
+![Missing required parameter in request.](storage/app/public/readme_images/unsuccessful_post.png)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Missing required parameter in request
 
-## License
+```
+{
+    "message": "The title field is required.",
+    "errors": {
+        "title": [
+            "The title field is required."
+        ]
+    }
+}
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Examples of successful requests
+
+### Successful post request
+
+![Successful post request.](storage/app/public/readme_images/successful_post.png)
+
+```
+{
+    "data": {
+        "id": 4,
+        "name": "from api 4",
+        "file_type": {
+            "dirname": "/home/web/demoproject/storage/app/public/files",
+            "basename": "2b55e15e-13dc-4aaf-ab9d-00ad358a9422.jpg",
+            "extension": "jpg",
+            "filename": "2b55e15e-13dc-4aaf-ab9d-00ad358a9422"
+        },
+        "file_size": 64558,
+        "path": "files/2b55e15e-13dc-4aaf-ab9d-00ad358a9422.jpg"
+    }
+}
+```
+
+### Collection of items
+
+![Successful collection request.](storage/app/public/readme_images/successful_collection.png)
+
+```
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "from api 1",
+            "file_type": {
+                "dirname": "/home/web/demoproject/storage/app/public/files",
+                "basename": "92ec8788-4206-486d-99e9-ced50f55fe69.jpg",
+                "extension": "jpg",
+                "filename": "92ec8788-4206-486d-99e9-ced50f55fe69"
+            },
+            "file_size": 64558,
+            "path": "files/92ec8788-4206-486d-99e9-ced50f55fe69.jpg"
+        },
+        {
+            "id": 2,
+            "name": "from api 2",
+            "file_type": {
+                "dirname": "/home/web/demoproject/storage/app/public/files",
+                "basename": "ad9782cb-f4af-45d1-af42-5d976aa0f894.jpg",
+                "extension": "jpg",
+                "filename": "ad9782cb-f4af-45d1-af42-5d976aa0f894"
+            },
+            "file_size": 64558,
+            "path": "files/ad9782cb-f4af-45d1-af42-5d976aa0f894.jpg"
+        },
+        {
+            "id": 3,
+            "name": "from api 3",
+            "file_type": {
+                "dirname": "/home/web/demoproject/storage/app/public/files",
+                "basename": "f0815ee0-0bae-47e4-8119-7cd5af49bae2.jpg",
+                "extension": "jpg",
+                "filename": "f0815ee0-0bae-47e4-8119-7cd5af49bae2"
+            },
+            "file_size": 64558,
+            "path": "files/f0815ee0-0bae-47e4-8119-7cd5af49bae2.jpg"
+        }
+    ]
+}
+```
+
+### Item
+
+![Successful item request.](storage/app/public/readme_images/successful_item.png)
+
+```
+{
+    "data": {
+        "id": 1,
+        "name": "from api 1",
+        "file_type": {
+            "dirname": "/home/web/demoproject/storage/app/public/files",
+            "basename": "92ec8788-4206-486d-99e9-ced50f55fe69.jpg",
+            "extension": "jpg",
+            "filename": "92ec8788-4206-486d-99e9-ced50f55fe69"
+        },
+        "file_size": 64558,
+        "path": "files/92ec8788-4206-486d-99e9-ced50f55fe69.jpg"
+    }
+}
+```
