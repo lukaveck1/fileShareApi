@@ -1,10 +1,12 @@
-# Working with fileShareApi
-
 # fileShareApi Documentation
 
-## Header
+## Authorization
 
 Token for authorization: 1|tI5IwkDKYvqgLOjUtXrwQLFtKaRCMgQuOFGhdsso7af921ac
+
+### Setting token in Postman
+
+![Set token.](public/readme_images/token.png)
 
 ## Endpoints
 
