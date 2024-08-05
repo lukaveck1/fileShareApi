@@ -46,9 +46,9 @@ When errors occur the consumer will get a JSON payload verifying that an error o
 }
 ```
 
-![Missing required parameter in request.](public/readme_images/unsuccessful_post.png)
-
 ### Missing required parameter in request
+
+![Missing required parameter in request.](public/readme_images/unsuccessful_post.png)
 
 ```
 {
