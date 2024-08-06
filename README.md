@@ -29,8 +29,14 @@
 | `404` | `Not found`               | Record does not exist                    |
 | `405` | `Method not allowed`      | Request to wrong endpoint                |
 | `422` | `Unprocessable content`   | Request is missing specified parameters  |
+| `429` | `Too many requests`   | Maximum number of requests in given time frame is reached  |
 
+## Request limits
 
+`GET` Requests are limited to 10 per minute.
+`POST` Requests are limited to 5 per minute.
+
+For more details check in the `Errors` section.
 
 ## Errors
 
@@ -67,7 +73,45 @@ When errors occur the consumer will get a JSON payload verifying that an error o
 
 ```
 {
-    "error": "File MIME type must be image."
+    "message": "File MIME type must be image.",
+    "errors": {
+        "photo": [
+            "File MIME type must be image."
+        ]
+    }
+}
+```
+
+### Uploading image that is too big
+
+![File is too big.](public/readme_images/file_size_error.png)
+
+```
+{
+    "message": "Image size must be less than 1 MB.",
+    "errors": {
+        "photo": [
+            "Image size must be less than 1 MB."
+        ]
+    }
+}
+```
+
+### Too many GET/POST requests 
+
+![Too many GET requests.](public/readme_images/get_request_limit.png)
+
+```
+{
+    "error": "Number of GET requests per minute is limited to 10."
+}
+```
+
+![Too many POST requests.](public/readme_images/post_request_limit.png)
+
+```
+{
+    "error": "Number of POST requests per minute is limited to 5."
 }
 ```
 
