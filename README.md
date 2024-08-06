@@ -1,5 +1,7 @@
 # fileShareApi Documentation
 
+fileShareAPI helps us quickly store photos and retrieve data about them.
+
 ## Endpoints
 
 | Method   | URL                                      | Description                              |
