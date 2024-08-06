@@ -2,6 +2,188 @@
 
 fileShareAPI helps us quickly store photos and retrieve data about them.
 
+### Installing localy
+
+## Setting up development tools
+
+Before generating ssh keys, cloning and setting up our project locally, we must make sure we have the following tools installed - versions downloaded at this point of time are listed after links:
+
+i. Git - https://git-scm.com/download/win (v2.46)
+
+ii. Composer - https://getcomposer.org/download/ (v2.7.7)
+
+iii. XAMPP with PHP (8.2.12)
+
+We will use XAMPP as our web server with PHP version 8.2
+
+https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download
+
+After XAMPP installation we have to tweak php configuration file.
+Move to xampp/php folder and find php configuration file, then open it with text editor and find the following line:
+
+The folder should look like this:
+
+![Php conf file.](public/readme_images/php_conf.png)
+
+`;extension=zip` and remove the ';' then save the file.
+
+![Zip extension.](public/readme_images/zip_ext.png)
+
+iv. NodeJS - https://nodejs.org/en/download/prebuilt-installer (v20.16.0 LTS)
+
+v. Postman - https://www.postman.com/downloads/ - Create account!
+
+After that make sure you have your environment variables set up correctly:
+
+![Environment variables.](public/readme_images/environment_variables.png)
+
+1. Generate ssh key
+
+In terminal run the following command: `ssh-keygen -t ed25519 -C "your_github_mail@example.com"`
+
+i. Choose file where the key will be saved. Press Enter to choose recommended default path.
+ii. Enter passphrase and save it, we will need it later!
+
+If everything was done correctly, you should now have two keys in .ssh folder.
+
+![Generate ssh key.](public/readme_images/generate_key.png)
+
+2. Getting content of our public key
+
+*`cat` command might not work in normal terminal, but it will work on Powershell terminal
+
+In terminal run the following command: `cat PATH/.ssh/id_ed25519.pub`
+
+copy the whole string starting from ssh-ed25519 to the end of your mail
+
+![Generate ssh key.](public/readme_images/generate_key.png)
+
+3. Add your public key to Github account
+
+Log into your Github account and go to https://github.com/settings/keys
+
+Click on button `New SSH key` then add title that refers to project and paste the content of public key and click 'Add SSH key'.
+
+![Adding public ssh key to github.](public/readme_images/adding_ssh_key.png)
+
+You should see your key now as such:
+
+![Saved ssh key on Github.](public/readme_images/saved_key.png)
+
+4. Cloning the project locally 
+
+Now we are ready to clone the project!
+
+Open up your terminal and move into the folder `path/xampp/htdocs`.
+
+In terminal run following command: `git clone git@github.com:lukaveck1/fileShareApi.git` and we should see the following:
+
+![Cloned project.](public/readme_images/cloned_project.png)
+
+
+5. Composer
+
+Move into the created folder with `cd fileShareApi` and now we need to run `composer install`. If we didn't enable the .zip extension in php configuration file, we might run into problems. So make sure it's enabled!
+
+![Composer1.](public/readme_images/composer1.png)
+![Composer2.](public/readme_images/composer2.png)
+
+6. Configure .env file
+
+Currently we only have .env.example file - the easiest way to set up your `.env` file is to simply rename `.env.example` file into `.env` file and from then on change it
+
+7. Set application encryption key
+
+Run `php artisan key:generate` - we need to set a key before serving our files
+
+8. Create database and set .env file correctly
+
+Run XAMPP and start Apache server and MySQL. 
+
+![XAMPP.](public/readme_images/xamp.png)
+
+Now go to folowing link `localhost/phpmyadmin` and create a new database. In our case we name it `fileshare` and then make sure you set the .env file accordingly:
+
+![db.](public/readme_images/create_db.png)
+
+Make sure the following variables are set identically!!!
+
+![db.](public/readme_images/env_db.png)
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=fileshare
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+9. Migrate database
+
+Run `php artisan migrate` and we should see that our DB got updated.
+
+![Running migrations.](public/readme_images/run_migrations.png)
+
+![Updated database.](public/readme_images/db_migrated.png)
+
+10. Serving our files
+
+Now we can finally run `php artisan serve` and see our application up and running when we go to URL: `localhost:8000` -> make sure you specify port `:8000` after `localhost`!!!
+
+![Serving application.](public/readme_images/serve.png)
+
+![Page.](public/readme_images/page.png)
+
+11. Adding token
+
+To add a token, we must first create an user. To do so we can use `php artisan tinker` and specify user data then register new User.
+
+```
+php artisan tinker
+$user = new App\Models\User();
+$user->password = Hash::make('developer-access');
+$user->email = 'admin@mail.com';
+$user->name = 'Admin';
+$user->save();
+```
+
+![Adding user.](public/readme_images/user_creation.png)
+
+To add token now we need to run the following on our user:
+
+`$user->createToken('developer-access');`
+
+Save the plainTextToken value, since this is what we are going to use as our token when sending requests! We also got new record in database:
+
+![Token creation.](public/readme_images/token_creation.png)
+
+Now close tinker CLI by executing `exit();`.
+
+12. Sending requests with Postman
+
+Now that we have our token we can finally use it to retrieve data or upload files.
+
+Make sure that you have web server running in order for this step to work, so check again if you have executed `php artisan run` and have server running.
+
+We can test with simple GET request to retrieve data and no authorization and then add token and do a GET/POST request to see if everything is working.
+
+i. Try GET request without token
+
+![GET with no token.](public/readme_images/test_1.png)
+
+ii. Try GET request with token
+
+![GET with token.](public/readme_images/test_1.png)
+
+iii. Try POST request with token - we upload a file!
+
+![POST with token.](public/readme_images/test_1.png)
+
+iv. Try GET request of all data again and check if file is in database
+
+![Get and database.](public/readme_images/test_1.png)
+
 ## Endpoints
 
 | Method   | URL                                      | Description                              |
