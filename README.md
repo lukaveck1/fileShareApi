@@ -2,7 +2,7 @@
 
 fileShareAPI helps us quickly store photos and retrieve data about them.
 
-## Installing localy
+## Installing locally
 
 ### Setting up development tools
 
