@@ -78,7 +78,7 @@ Open up your terminal and move into the folder `path/xampp/htdocs`.
 
 In terminal run following command: `git clone git@github.com:lukaveck1/fileShareApi.git` and we should see the following:
 
-![Cloned project.](public/readme_images/cloned_project.png)
+![Cloned project.](public/readme_images/clone_project.png)
 
 
 ### Composer
