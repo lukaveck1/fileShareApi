@@ -2,9 +2,9 @@
 
 fileShareAPI helps us quickly store photos and retrieve data about them.
 
-### Installing localy
+## Installing localy
 
-## Setting up development tools
+### Setting up development tools
 
 Before generating ssh keys, cloning and setting up our project locally, we must make sure we have the following tools installed - versions downloaded at this point of time are listed after links:
 
@@ -104,11 +104,11 @@ Run XAMPP and start Apache server and MySQL.
 
 Now go to folowing link `localhost/phpmyadmin` and create a new database. In our case we name it `fileshare` and then make sure you set the .env file accordingly:
 
-![db.](public/readme_images/create_db.png)
+![Creating database.](public/readme_images/create_db.png)
 
 Make sure the following variables are set identically!!!
 
-![db.](public/readme_images/env_db.png)
+![Database config.](public/readme_images/env_db.png)
 
 ```
 DB_CONNECTION=mysql
