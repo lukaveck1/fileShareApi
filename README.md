@@ -14,26 +14,26 @@ Before generating ssh keys, cloning and setting up our project locally, we must 
 
 * XAMPP with PHP (8.2.12)
 
-We will use XAMPP as our web server with PHP version 8.2
+        We will use XAMPP as our web server with PHP version 8.2
 
-https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download
+        https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download
 
-After XAMPP installation we have to tweak php configuration file.
-Move to xampp/php folder and find php configuration file, then open it with text editor and find the following line:
+        After XAMPP installation we have to tweak php configuration file.
+        Move to xampp/php folder and find php configuration file, then open it with text editor and find the      following line:
 
-The folder should look like this:
+        The folder should look like this:
 
-![Php conf file.](public/readme_images/php_conf.png)
+        ![Php conf file.](public/readme_images/php_conf.png)
 
-`;extension=zip` and remove the ';' then save the file.
+        `;extension=zip` and remove the ';' then save the file.
 
-![Zip extension.](public/readme_images/zip_ext.png)
+        ![Zip extension.](public/readme_images/zip_ext.png)
 
 * NodeJS - https://nodejs.org/en/download/prebuilt-installer (v20.16.0 LTS)
 
 * Postman - https://www.postman.com/downloads/ - Create account!
 
-After that make sure you have your environment variables set up correctly:
+* Environment variables - make sure they are set up correctly:
 
 ![Environment variables.](public/readme_images/environment_variables.png)
 
