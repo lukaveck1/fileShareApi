@@ -90,7 +90,9 @@ Move into the created folder with `cd fileShareApi` and now we need to run `comp
 
 #### Configure .env file
 
-Currently we only have .env.example file - the easiest way to set up your `.env` file is to simply rename `.env.example` file into `.env` file and from then on change it
+Currently we only have .env.example file - the easiest way to set up your `.env` file is to simply rename `.env.example` file into `.env` file and from then on change it. It should now look like this:
+
+![Env file.](public/readme_images/env_file.png)
 
 ### Set application encryption key
 
