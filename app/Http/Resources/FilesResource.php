@@ -19,9 +19,11 @@ class FilesResource extends JsonResource
         return [ 
             'id' => $this->id,
             'name' => $this->name,
+            'title' => $this->title,
+            'description' => $this->description,
             'file_type' => pathinfo($filePath),
             'file_size' => filesize($filePath),
-            'path' => $this->photo
+            'path' => $this->photo,
         ];
     }
 }

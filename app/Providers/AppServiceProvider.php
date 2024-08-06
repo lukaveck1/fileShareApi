@@ -22,14 +22,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        RateLimiter::for('getRequestApiLimiter', function () { 
-            return Limit::perMinute(10)->response(function () {
+        RateLimiter::for('getRequestApiLimiter', function (Request $request) { 
+            return Limit::perMinute(10)->by($request->ip())->response(function () {
                 return response()->json(['error' => 'Number of GET requests per minute is limited to 10.'], 401);
             });
         });
 
-        RateLimiter::for('postRequestApiLimiter', function () { 
-            return Limit::perMinute(2)->response(function () {
+        RateLimiter::for('postRequestApiLimiter', function (Request $request) { 
+            return Limit::perMinute(3)->by($request->ip())->response(function () {
                 return response()->json(['error' => 'Number of POST requests per minute is limited to 5.'], 401);
             });
         });
