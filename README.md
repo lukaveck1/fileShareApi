@@ -58,7 +58,7 @@ In terminal run the following command: `cat PATH/.ssh/id_ed25519.pub`
 
 Copy the whole string starting from ssh-ed25519 to the end of your mail
 
-![Generate ssh key.](public/readme_images/generate_key.png)
+![Generate ssh key.](public/readme_images/ssh_content.png)
 
 ### Add your public key to Github account
 
