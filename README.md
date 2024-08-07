@@ -8,32 +8,34 @@ fileShareAPI helps us quickly store photos and retrieve data about them.
 
 Before generating ssh keys, cloning and setting up our project locally, we must make sure we have the following tools installed - versions downloaded at this point of time are listed after links:
 
+* XAMPP with PHP (8.2.12)
+
+    We will use XAMPP as our web server with PHP version 8.2
+
+    https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download
+
+    After XAMPP installation we have to tweak php configuration file.
+    Move to xampp/php folder and find php configuration file, then open it with text editor and find the following line:
+
+    The folder should look like this:
+
+    ![Php conf file.](public/readme_images/php_conf.png)
+
+    `;extension=zip` and remove the ';' then save the file.
+
+    ![Zip extension.](public/readme_images/zip_ext.png)
+
 *  Git - https://git-scm.com/download/win (v2.46)
 
 * Composer - https://getcomposer.org/download/ (v2.7.7)
-
-* XAMPP with PHP (8.2.12)
-
-We will use XAMPP as our web server with PHP version 8.2
-
-https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download
-
-After XAMPP installation we have to tweak php configuration file.
-Move to xampp/php folder and find php configuration file, then open it with text editor and find the following line:
-
-The folder should look like this:
-
-![Php conf file.](public/readme_images/php_conf.png)
-
-`;extension=zip` and remove the ';' then save the file.
-
-![Zip extension.](public/readme_images/zip_ext.png)
+  
+    __*Warning: Make sure XAMPP is installed before Composer, otherwise in Composer installation Wizard the PHP path will not be found!__
 
 * NodeJS - https://nodejs.org/en/download/prebuilt-installer (v20.16.0 LTS)
 
 * Postman - https://www.postman.com/downloads/ - Create account!
 
-After that make sure you have your environment variables set up correctly:
+* Environment variables - make sure they are set up correctly:
 
 ![Environment variables.](public/readme_images/environment_variables.png)
 
@@ -176,15 +178,15 @@ We can test with simple GET request to retrieve data and no authorization and th
 
 * Try GET request with token
 
-![GET with token.](public/readme_images/test_1.png)
+![GET with token.](public/readme_images/test_2.png)
 
 * Try POST request with token - we upload a file!
 
-![POST with token.](public/readme_images/test_1.png)
+![POST with token.](public/readme_images/test_3.png)
 
 * Try GET request of all data again and check if file is in database
 
-![Get and database.](public/readme_images/test_1.png)
+![Get and database.](public/readme_images/test_4.png)
 
 ## Endpoints
 
